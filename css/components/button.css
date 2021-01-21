@@ -6,4 +6,6 @@
   border: none;
   cursor: pointer;
   font-family: 'Roboto';
+  outline: none;
+  background-color: transparent;
 }
