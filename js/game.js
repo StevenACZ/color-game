@@ -8,6 +8,8 @@ const btnHard = document.querySelector('.btn--hard');
 
 const squares = document.querySelectorAll('.squares__item');
 
+const help = document.querySelector('.help');
+
 // Function - randomColor
 const randomColor = () => {
   const red = Math.floor(Math.random() * 255);
@@ -25,6 +27,9 @@ let btnSelected = {
 
 // Variable - correctSquare
 const eventCorrent = () => {
+  help.textContent = 'Correct!';
+  help.style.color = rand;
+
   squares.forEach( square => {
     square.style.backgroundColor = rand;
     square.style.opacity = '100';
@@ -60,6 +65,8 @@ const queryToSquares = (difficult = 'easy') => {
     square.removeEventListener('click', eventCorrent);
     square.addEventListener('click', (event) => {
       event.target.style.opacity = '0';
+      help.textContent = 'Try again';
+      help.style.color = randFake;
     })
   })
     
@@ -82,12 +89,12 @@ squares.forEach( square => {
   square.style.backgroundColor = randFake;
 })
 
-
 // Button - btnNewColors
 btnNewColors.addEventListener('click', (event) => {
   rand = randomColor();
   randFake = randomColor();
   
+  help.textContent = '';
   header.style.backgroundColor = randFake;
   title.textContent = randFake;
   btnNewColors.style.color = randFake;
