@@ -10,6 +10,22 @@ const squares = document.querySelectorAll('.squares__item');
 
 const help = document.querySelector('.help');
 
+// Function - BeforeAll
+const beforeAll = () => {
+  let rand = randomColor();
+  let randFake = randomColor();
+  title.textContent = rand;
+  
+  header.style.backgroundColor = randFake;
+  btnNewColors.style.color = randFake;
+  btnEasy.style.color = randFake;
+  btnHard.style.color = randFake;
+  
+  squares.forEach( square => {
+    square.style.backgroundColor = randFake;
+  })
+}
+
 // Function - randomColor
 const randomColor = () => {
   const red = Math.floor(Math.random() * 255);
@@ -19,11 +35,20 @@ const randomColor = () => {
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
+// Function - showSquares
+const showSquares = (opacity) => {
+  squares[3].style.opacity = `${opacity}`;
+  squares[4].style.opacity = `${opacity}`;
+  squares[5].style.opacity = `${opacity}`;  
+}
+
 // Variable - btnSelected
 let btnSelected = {
   btnEasy: false,
   btnHard: false
 } 
+
+beforeAll();
 
 // Variable - correctSquare
 const eventCorrent = () => {
@@ -34,6 +59,7 @@ const eventCorrent = () => {
     square.style.backgroundColor = rand;
     square.style.opacity = '100';
   })
+
   header.style.backgroundColor = rand;
 
   if (btnSelected.btnEasy) {
@@ -49,6 +75,12 @@ const eventCorrent = () => {
   btnNewColors.style.color = rand;
 }
 
+const eventIncorrect = (event) => {
+  event.target.style.opacity = '0';
+  help.textContent = 'Try again';
+  help.style.color = randFake;
+}
+
 const queryToSquares = (difficult = 'easy') => {
   let correctSquareNum = 0;
   
@@ -57,37 +89,18 @@ const queryToSquares = (difficult = 'easy') => {
   } else if (difficult == 'hard') {
     correctSquareNum = Math.floor(Math.random() * 6); // HARD
   }
-  
+
   const correctSquare = squares[correctSquareNum];
   
   squares.forEach( square => {
     square.style.backgroundColor = randomColor();
     square.removeEventListener('click', eventCorrent);
-    square.addEventListener('click', (event) => {
-      event.target.style.opacity = '0';
-      help.textContent = 'Try again';
-      help.style.color = randFake;
-    })
+    square.addEventListener('click', event => eventIncorrect(event));
   })
     
   correctSquare.addEventListener('click', eventCorrent)
   correctSquare.style.backgroundColor = rand;
 }
-
-
-// Before all
-let rand = randomColor();
-let randFake = randomColor();
-title.textContent = rand;
-
-header.style.backgroundColor = randFake;
-btnNewColors.style.color = randFake;
-btnEasy.style.color = randFake;
-btnHard.style.color = randFake;
-
-squares.forEach( square => {
-  square.style.backgroundColor = randFake;
-})
 
 // Button - btnNewColors
 btnNewColors.addEventListener('click', (event) => {
@@ -128,9 +141,7 @@ btnEasy.addEventListener('click', (event) => {
   btnHard.style.backgroundColor = 'transparent';
   btnHard.style.color = randFake;
 
-  squares[3].style.opacity = '0';
-  squares[4].style.opacity = '0';
-  squares[5].style.opacity = '0';
+  showSquares(0);
 
   queryToSquares('easy');
 })
@@ -147,6 +158,8 @@ btnHard.addEventListener('click', (event) => {
 
   btnEasy.style.backgroundColor = 'transparent';
   btnEasy.style.color = randFake;
+
+  showSquares(100);
 
   queryToSquares('hard');
 })
