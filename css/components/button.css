@@ -1,0 +1,9 @@
+.btn {
+  padding: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 19px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto';
+}
