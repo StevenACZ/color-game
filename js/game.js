@@ -50,7 +50,7 @@ let btnSelected = {
 
 beforeAll();
 
-// Variable - correctSquare
+// Functions - eventCorrent
 const eventCorrent = () => {
   help.textContent = 'Correct!';
   help.style.color = rand;
@@ -75,12 +75,14 @@ const eventCorrent = () => {
   btnNewColors.style.color = rand;
 }
 
+// Functions - eventIncorrect
 const eventIncorrect = (event) => {
   event.target.style.opacity = '0';
   help.textContent = 'Try again';
   help.style.color = randFake;
 }
 
+// Functions - queryToSquares
 const queryToSquares = (difficult = 'easy') => {
   let correctSquareNum = 0;
   
