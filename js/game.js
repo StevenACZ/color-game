@@ -111,11 +111,10 @@ btnNewColors.addEventListener('click', (event) => {
   
   help.textContent = '';
   header.style.backgroundColor = randFake;
-  title.textContent = randFake;
+  title.textContent = rand;
   btnNewColors.style.color = randFake;
   btnEasy.style.color = randFake;
   btnHard.style.color = randFake;
-  title.textContent = randFake;
 
   squares.forEach( square => {
     square.style.backgroundColor = randFake;
